@@ -1,0 +1,113 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(){
+	string a;
+	string b;
+	
+	cout << "Enter first number(ex: 5i+6): ";
+	getline(cin, a);
+	cout << "Enter second number(ex: 7i-4): ";
+	getline(cin, b);
+	
+	int inumA=0;
+	string astr="";
+	bool signA=false;
+	if(a.at(0)=='-'){
+		signA=true;
+	}
+	
+	for(char c: a){
+		if(isdigit(c)){
+			astr=astr+c;
+		}else if(c=='i'){
+			break;
+		}
+	}
+	
+	for(char c: astr){
+		inumA=inumA*10+(c-'0'); 
+	}
+	if(signA){
+		inumA=inumA*(-1);
+	}
+	
+	string aval="";
+	signA=false;
+	for(int i=0; i<a.length(); i++){
+		if(a.at(i)=='i' && a.at(i+1)=='+'){
+			aval = a.substr(i + 2);
+    		break;
+		}else if(a.at(i)=='i' && a.at(i+1)=='-'){
+			aval = a.substr(i + 2);
+			signA=true;
+			break;
+		}
+	}
+	
+	int numA=0;
+	for(char c: aval){
+		numA=numA*10+(c-'0');
+	}
+	if(signA){
+		numA=numA*(-1);
+	}
+	
+	int inumB=0;
+	string bstr="";
+	bool signB=false;
+	if(b.at(0)=='-'){
+		signB=true;
+	}
+	for(char c: b){
+		if(isdigit(c)){
+			bstr=bstr+c;
+		}else if(c=='i'){
+			break;
+		}
+	}
+	
+	for(char c: bstr){
+		inumB=inumB*10+(c-'0'); 
+	}
+	
+	if(signB){
+		inumB=inumB*(-1);
+	}
+	
+	string bval="";
+	signB=false;
+	for(int i=0; i<b.length(); i++){
+		if(b.at(i)=='i' && b.at(i+1)=='+'){
+			bval = b.substr(i + 2);
+    		break;
+		}else if(b.at(i)=='i' && b.at(i+1)=='-'){
+			bval = b.substr(i + 2);
+			signB=true;
+			break;
+		}
+	}
+	
+	int numB=0;
+	for(char c: bval){
+		numB=numB*10+(c-'0');
+	}
+	if(signB){
+		numB=numB*(-1);
+	}
+	
+	int iSum = inumA+inumB;
+	int sum = numA+numB;
+	char outsign;
+	if(sum>=0){
+		outsign='+';
+	}else{
+		outsign='-';
+	}
+	
+	cout << "Result: " << iSum << "i" << outsign << sum;
+	
+	return 0;
+}
